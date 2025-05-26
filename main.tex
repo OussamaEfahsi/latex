@@ -1,0 +1,90 @@
+\documentclass[openany,12pt,oneside]{extreport}
+
+\input{packages} % This file should contain \usepackage{fancyhdr} and \usepackage{xcolor}
+\linespread{1.5}
+\setmainfont{Times New Roman}
+\begin{document}
+
+\include{FrontMatter/titlepage}
+% \include{FrontMatter/Dedication} % If you have one
+% \include{FrontMatter/Acknowledgement} % Moved after pagenumbering for consistency if these have the style
+% \include{FrontMatter/Abstract}
+% \include{FrontMatter/Acronyms}
+
+% \pagenumbering{roman} % For front matter if you want roman numerals
+% ... (your front matter includes that should have roman numbering or no numbering)
+
+\cleardoublepage % Ensures new page style starts correctly if switching numbering
+\pagenumbering{arabic} % Switch to Arabic numbering for main content
+
+% Define colors (if not already in packages.tex, but good to have them accessible)
+\definecolor{myheaderfooterlinecolor}{rgb}{0.0, 0.0, 0.55} % A nice blue, adjust as needed
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0} % Adjusted for better visibility than 0.39
+
+% --- Fancy Header/Footer Setup for Main Chapters ---
+\fancypagestyle{mainchapterstyle}{%
+    \fancyhf{} % Clear all header and footer fields
+    \renewcommand{\headrulewidth}{0.4pt} % Thickness of the header rule
+    \renewcommand{\footrulewidth}{0.4pt} % Thickness of the footer rule
+    \fancyhead[L]{\small\textcolor{myheaderfooterlinecolor}{\leftmark}} % Chapter name on the left
+    % \fancyhead[C]{} % Center header empty
+    % \fancyhead[R]{} % Right header empty
+
+     % Your name on the left
+    \fancyfoot[C]{\small\textcolor{myheaderfooterlinecolor}{\thepage}} % Page number in the center
+    \fancyfoot[R]{\small\textcolor{myheaderfooterlinecolor}{2024/2025}} % Academic year on the right
+    % Adjust colors and text as needed
+}
+\pagestyle{mainchapterstyle} % Apply this style to subsequent pages
+
+%
+% Section numbering (keep your existing definitions)
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\hspace*{0.1cm} \arabic{subsection}}
+\renewcommand{\thesubsubsection}{\hspace*{0.2cm} \arabic{subsection}.\arabic{subsubsection}}
+% Customize section titles (keep your existing definitions)
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{darkblue}}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{darkgreen}}
+  {\thesubsection}
+  {1em}
+  {}
+
+% --- Include your content ---
+% These should now have the 'mainchapterstyle'
+\newpage % Good practice before starting main content after style changes
+\include{FrontMatter/Acknowledgement} % If these should also have the main style
+\include{FrontMatter/Abstract}
+\include{FrontMatter/Acronyms}
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+% \printglossary[type=\acronymtype, title=Acronyms] % You already have \include{FrontMatter/Acronyms}
+                                                  % Choose one way to include acronyms.
+                                                  % If Acronyms.tex uses \printglossary, then this is fine.
+                                                  % Otherwise, if Acronyms.tex is just text, remove this \printglossary.
+\clearpage
+
+
+\include{Chapters/01_Introduction}
+\include{Chapters/01_Chapter1}
+% \include{Chapters/03_Chapter2} % Assuming you might have this
+\include{Chapters/04_Chapter3}
+\include{Chapters/05_Chapter4}
+\include{Chapters/06_Chapter5}
+\include{Chapters/07_Conclusion}
+
+% For bibliography, you might want a simpler page style or the plain style
+\cleardoublepage
+% \pagestyle{plain} % Switch to plain style for bibliography if desired
+\part{Bibliography} % \part usually starts on a new page and might reset styles
+\printbibliography
+
+\end{document}
